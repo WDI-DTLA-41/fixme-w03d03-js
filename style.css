@@ -1,0 +1,6 @@
+.col {
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 3em;
+}
