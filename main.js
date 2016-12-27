@@ -58,8 +58,11 @@ var getFace = function(number) {
   case 3:
     face = '☹';
     break;
-  default:
+  case 4:
     face = '🤢';
+    break;
+  default:
+    face = '💀';
     break;
   }
   return face;
