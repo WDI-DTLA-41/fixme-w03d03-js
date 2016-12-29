@@ -9,7 +9,7 @@ var markGrid = function(row, col) {
   if (!grid[row]) return false;
   grid[row][col].clicks += 1;
   return true;
-}
+};
 
 // View
 var $grid;
@@ -18,16 +18,16 @@ var $row;
 var $col;
 
 var render = function() {
-  $grid.innerHTML = renderGrid(grid);
-}
+  $grid.html(renderGrid(grid));
+};
 
 var renderGrid = function(grid){
   var html = '';
   grid.forEach(function(row) {
     html += renderRow(row);
-  })
+  });
   return html;
-}
+};
 
 var renderRow = function(row){
   var html = '<div class="row">';
@@ -36,13 +36,13 @@ var renderRow = function(row){
   });
   html += '</div>';
   return html;
-}
+};
 
 var renderCol = function(col) {
   var face = getFace(col.clicks);
   var html = '<div class="col">' + face + '</div>';
   return html;
-}
+};
 
 var getFace = function(number) {
   switch (number) {
@@ -58,12 +58,15 @@ var getFace = function(number) {
   case 3:
     face = '☹';
     break;
-  default:
+  case 4:
     face = '🤢';
+    break;
+  default:
+    face = '💀';
     break;
   }
   return face;
-}
+};
 
 
 var handleClick = function(event) {
@@ -71,31 +74,31 @@ var handleClick = function(event) {
   markGrid(pos.row, pos.col);
   clearPosition();
   render();
-}
+};
 
 var addEventListeners = function() {
-  $markBtn.addEventListener('click', handleClick)
-}
+  $markBtn.on('click', handleClick);
+};
 
 var getPosition = function(){
   var position = {
-    row: $row.value,
-    col: $col.value
+    row: $row.val(),
+    col: $col.val()
   }
   return position;
-}
+};
 
 var clearPosition = function() {
-  $row.value = '';
-  $col.value = '';
-}
+  $row.val('');
+  $col.val('');
+};
 
 // http://stackoverflow.com/questions/4584373/difference-between-window-load-and-document-ready-functionshttp://stackoverflow.com/questions/4584373/difference-between-window-load-and-document-ready-functions
 window.onload = function(){
-  $grid = document.querySelector('.grid');
-  $markBtn = document.querySelector('#mark');
-  $row = document.querySelector('input[name=row]');
-  $col = document.querySelector('input[name=col]');
+  $grid = $('.grid');
+  $markBtn = $('#mark');
+  $row = $('input[name=row]');
+  $col = $('input[name=col]');
   render();
   addEventListeners();
-}
+};
